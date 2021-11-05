@@ -57,11 +57,33 @@
     !empty(0)=!true=>false */
 
     if(isset($_GET['month'])){
-        
-        if($_GET['month']>0 && $_GET['month']<13){
-            $month=$_GET['month'];
-            $year=date("Y");
+        $month=$_GET['month'];
+        $year=$_GET['year'];
+
+        if($month>0 && $month<13){
+            $lastmonth=$month-1;
+            $lastyear=$year;
+
+            $nextmonth=$month+1;
+            $nextyear=$year;
+
+            if($month==1){
+                $lastmonth=12;
+                $lastyear=$year-1;
+
+                $nextmonth=$month+1;
+                $nextyear=$year;
+
+            }else if($month==12){
+
+                $lastmonth=$month-1;
+                $lastyear=$year;
+
+                $nextmonth=1;
+                $nextyear=$year+1;
+            }
         }elseif($_GET['month']<=0){
+            
             $month=12;
             $year=date("Y")-1;
         }else{
@@ -73,6 +95,27 @@
     }else{
         $month=date("m");
         $year=date("Y");
+        $lastmonth=$month-1;
+        $lastyear=$year;
+
+        $nextmonth=$month+1;
+        $nextyear=$year;
+
+        if($month==1){
+            $lastmonth=12;
+            $lastyear=$year-1;
+
+            $nextmonth=$month+1;
+            $nextyear=$year;
+
+        }else if($month==12){
+
+            $lastmonth=$month-1;
+            $lastyear=$year;
+            
+            $nextmonth=1;
+            $nextyear=$year+1;
+        }
     }
     
     
@@ -101,14 +144,8 @@
 
 <h3><?=$year;?>年<?=$month;?>月</h3>
  <div>
-     <?php
-     $lastmonth=$month-1;
-     ?>
-     <a href="index.php?year=<?=$year;?>&month=<?=$lastmonth;?>">上一個月</a>
-     <?php
-     $nextmonth=$month+1;
-     ?>
-     <a href="index.php?year=<?=$year;?>&month=<?=$nextmonth;?>">下一個月</a>
+     <a href="index.php?year=<?=$lastyear;?>&month=<?=$lastmonth;?>">上一個月</a>
+     <a href="index.php?year=<?=$nextyear;?>&month=<?=$nextmonth;?>">下一個月</a>
 </div>   
 <div class="calendar">
     
