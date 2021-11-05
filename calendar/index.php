@@ -118,7 +118,7 @@
 <div class="calendar">
     
 <?php
-$w=0;
+
 
 //月曆頭的地方
 foreach($headers as $header){
@@ -129,16 +129,14 @@ foreach($headers as $header){
 
 //月曆body的地方
 for($i=0;$i<$allCells;$i++){
+    $w=$i%7;
     if(is_numeric($td[$i])){
         $date=date("$year-$month-").$td[$i];
-        $w=date("w",strtotime($date));
     }
-    
+
     if($w==0 || $w==6){
-
-        echo "<div class='cell'>";
+        echo "<div class='dayoff cell'>";
     }else{
-
         echo "<div class='cell'>";
     }
     echo $td[$i];
