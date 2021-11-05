@@ -59,65 +59,32 @@
     if(isset($_GET['month'])){
         $month=$_GET['month'];
         $year=$_GET['year'];
-
-        if($month>0 && $month<13){
-            $lastmonth=$month-1;
-            $lastyear=$year;
-
-            $nextmonth=$month+1;
-            $nextyear=$year;
-
-            if($month==1){
-                $lastmonth=12;
-                $lastyear=$year-1;
-
-                $nextmonth=$month+1;
-                $nextyear=$year;
-
-            }else if($month==12){
-
-                $lastmonth=$month-1;
-                $lastyear=$year;
-
-                $nextmonth=1;
-                $nextyear=$year+1;
-            }
-        }elseif($_GET['month']<=0){
-            
-            $month=12;
-            $year=date("Y")-1;
-        }else{
-            $month=1;
-            $year=date("Y")+1;
-
-        }
-
     }else{
         $month=date("m");
         $year=date("Y");
-        $lastmonth=$month-1;
-        $lastyear=$year;
+    }
+    
+    $lastmonth=$month-1;
+    $lastyear=$year;
+
+    $nextmonth=$month+1;
+    $nextyear=$year;
+    
+    if($month==1){
+        $lastmonth=12;
+        $lastyear=$year-1;
 
         $nextmonth=$month+1;
         $nextyear=$year;
 
-        if($month==1){
-            $lastmonth=12;
-            $lastyear=$year-1;
+    }else if($month==12){
 
-            $nextmonth=$month+1;
-            $nextyear=$year;
+        $lastmonth=$month-1;
+        $lastyear=$year;
 
-        }else if($month==12){
-
-            $lastmonth=$month-1;
-            $lastyear=$year;
-            
-            $nextmonth=1;
-            $nextyear=$year+1;
-        }
+        $nextmonth=1;
+        $nextyear=$year+1;
     }
-    
     
     $firstWeekWhiteDays=date("w",strtotime($firstDay));
     $monthDays=date("t",strtotime($firstDay));
