@@ -51,10 +51,28 @@
 
     //直接訪問本頁不帶值
     //訪問本頁帶月份值
-    if(!empty($_GET['month'])){
-        $month=$_GET['month'];
+    /* empty(1)=>false
+    !empty(1)=>!false=>true
+    empty(0)=>true
+    !empty(0)=!true=>false */
+
+    if(isset($_GET['month'])){
+        
+        if($_GET['month']>0 && $_GET['month']<13){
+            $month=$_GET['month'];
+            $year=date("Y");
+        }elseif($_GET['month']<=0){
+            $month=12;
+            $year=date("Y")-1;
+        }else{
+            $month=1;
+            $year=date("Y")+1;
+
+        }
+
     }else{
         $month=date("m");
+        $year=date("Y");
     }
     
     
@@ -81,10 +99,16 @@
 
     ?>
 
-<h3><?=date("Y");?>年<?=$month;?>月</h3>
+<h3><?=$year;?>年<?=$month;?>月</h3>
  <div>
-     <a href="index.php?month=10">上一個月</a>
-     <a href="index.php?month=12">下一個月</a>
+     <?php
+     $lastmonth=$month-1;
+     ?>
+     <a href="index.php?year=<?=$year;?>&month=<?=$lastmonth;?>">上一個月</a>
+     <?php
+     $nextmonth=$month+1;
+     ?>
+     <a href="index.php?year=<?=$year;?>&month=<?=$nextmonth;?>">下一個月</a>
 </div>   
 <div class="calendar">
     
