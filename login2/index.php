@@ -1,3 +1,12 @@
+<?php
+
+if(isset($_COOKIE['user'])){
+    header('location:mem_center.php');
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
